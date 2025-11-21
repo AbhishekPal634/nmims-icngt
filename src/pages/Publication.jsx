@@ -33,25 +33,22 @@ const Publication = () => {
           Full Length Paper Publication
         </h2>
         <p className="text-base md:text-lg mb-4 text-justify leading-relaxed">
-          Taylor and Francis (T&F) constitute a prominent global publishing
-          enterprise that is committed to rendering high-calibre research
-          comprehensible and accessible to individuals worldwide, thereby
-          facilitating the convergence of diverse individuals, concepts, and
-          perspectives to disseminate the insights of experts, theoretical
-          frameworks, and empirical truths.
+          <em>
+            Publisher details and description will be updated soon. Please check
+            back for the official publisher information and their profile.
+          </em>
         </p>
         <p className="text-base md:text-lg mb-4 text-justify leading-relaxed">
           All full-length papers that receive acceptance at the ICNGT-2025
           Conference will be compiled in a conference proceeding published by
-          Taylor and Francis (T&F) in both print and electronic formats, each
-          possessing an ISBN for the book and a DOI for each respective chapter,
-          along with promotional activities on the T&F website.
+          the official publisher (to be announced) in both print and electronic
+          formats, each possessing an ISBN for the book and a DOI for each
+          respective chapter. Further details about promotional activities will
+          be provided once the publisher is finalized.
         </p>
         <p className="text-base md:text-lg text-justify leading-relaxed">
-          T&F will advocate for the published volume to be considered for
-          indexing by Scopus, contingent upon adherence to Scopus's selection
-          criteria and the fulfillment of the scope and quality standards
-          requisite for Scopus Indexing.
+          Information regarding indexing and Scopus advocacy will be updated
+          after publisher confirmation.
         </p>
 
         {/* Highlights Grid */}
