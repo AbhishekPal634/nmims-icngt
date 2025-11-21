@@ -30,17 +30,18 @@ const Carousel = ({ images = [], autoPlayInterval = 3000 }) => {
   };
 
   return (
-    <div className="carousel w-full relative overflow-hidden">
+  // fixed height carousel: change h-64/md:h-144 to taste
+  <div className="carousel w-full relative overflow-hidden h-64 md:h-144">
       <div
-        className="flex transition-transform duration-500 ease-in-out"
+        className="flex transition-transform duration-500 ease-in-out h-full"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {images.map((image, index) => (
-          <div key={index} className="w-full shrink-0">
+          <div key={index} className="w-full shrink-0 h-full">
             <img
               src={image.src || image}
               alt={image.alt || `Slide ${index + 1}`}
-              className="w-full object-cover"
+              className="w-full h-full object-cover block"
             />
           </div>
         ))}

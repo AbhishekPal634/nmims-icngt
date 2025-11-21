@@ -5,7 +5,7 @@ const Publication = () => {
   const highlights = [
     {
       title: "Publisher",
-      content: "Taylor and Francis (T&F)",
+      content: "To be updated soon",
     },
     {
       title: "Format",

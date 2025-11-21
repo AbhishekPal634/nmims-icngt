@@ -13,6 +13,9 @@ import Accommodation from "./pages/Accommodation.jsx";
 import Downloads from "./pages/Downloads";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
+import Advisory from "./pages/committee/Advisory.jsx";
+import Organizer from "./pages/committee/Organizer.jsx";
+import Technical from "./pages/committee/Technical.jsx";
 
 const App = () => {
   return (
@@ -22,6 +25,9 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/committee" element={<Committee />} />
+          <Route path="/committee/advisory" element={<Advisory />} />
+          <Route path="/committee/organizer" element={<Organizer />} />
+          <Route path="/committee/technical" element={<Technical />} />
           <Route path="/call-for-papers" element={<CallForPapers />} />
           <Route path="/publication" element={<Publication />} />
           <Route path="/submission" element={<Submission />} />

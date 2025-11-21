@@ -4,8 +4,9 @@ import Carousel from "../components/Carousel";
 const Home = () => {
   const campusImages = [
     "/campus/campus-image.png",
-    "/campus/cricket-ground.png",
     "/campus/cf.png",
+    "/gallery/Day 1 ICDTV 2030 - Group Photo.JPG",
+    "/gallery/218A8523.JPG",
   ];
 
   return (

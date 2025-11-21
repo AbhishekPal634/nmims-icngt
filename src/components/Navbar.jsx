@@ -34,7 +34,20 @@ const Navbar = () => {
               <Link to="/about-us">About Us</Link>
             </li>
             <li>
-              <Link to="/committee">Committee</Link>
+              <details>
+                <summary>Committee</summary>
+                <ul>
+                  <li>
+                    <Link to="/committee/advisory">Advisory Committee</Link>
+                  </li>
+                  <li>
+                    <Link to="/committee/technical">Technical Committee</Link>
+                  </li>
+                  <li>
+                    <Link to="/committee/organizer">Organizing Committee</Link>
+                  </li>
+                </ul>
+              </details>
             </li>
             <li>
               <Link to="/call-for-papers">Call for Papers</Link>
@@ -81,13 +94,37 @@ const Navbar = () => {
               About Us
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               to="/committee"
               className="hover:opacity-70 transition-opacity"
             >
               Committee
             </Link>
+          </li> */}
+          <li className="relative group">
+            <span className="hover:opacity-70 transition-opacity cursor-pointer">
+              Committee
+            </span>
+
+            {/* dropdown: use visibility + opacity for smooth reveal and add spacing */}
+            <ul className="absolute left-0 mt-0 w-56 bg-base-100 rounded-md z-20 shadow-lg py-2 transition-all duration-200 transform -translate-y-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
+              <li>
+                <Link to="/committee/advisory" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 rounded">
+                  Advisory Committee
+                </Link>
+              </li>
+              <li>
+                <Link to="/committee/technical" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 rounded">
+                  Technical Committee
+                </Link>
+              </li>
+              <li>
+                <Link to="/committee/organizer" className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 rounded">
+                  Organizing Committee
+                </Link>
+              </li>
+            </ul>
           </li>
           <li>
             <Link
