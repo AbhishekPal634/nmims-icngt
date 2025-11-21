@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 const filenames = [
-  ".DS_Store",
   "218A8460.JPG",
   "218A8488.JPG",
   "218A8523.JPG",
@@ -22,11 +21,10 @@ const filenames = [
   "Interview of Dr S Prasad.JPG",
 ];
 
-// Build images
 const images = filenames
   .filter((f) => f && !f.startsWith("."))
   .map((f, i) => ({
-    src: `/Gallery/${encodeURIComponent(f)}`,
+    src: `/gallery/${encodeURIComponent(f)}`,
     title: f.replace(/\.[^.]+$/, ""),
     category: "Event",
     filename: f,
@@ -36,17 +34,27 @@ const images = filenames
 export default function Gallery() {
   const [hovered, setHovered] = useState(null);
   const [selected, setSelected] = useState(null);
-  const [slideDirection, setSlideDirection] = useState(null);
-  const [incoming, setIncoming] = useState(null);
-  const [animating, setAnimating] = useState(false);
-  const [animateIn, setAnimateIn] = useState(false);
 
   useEffect(() => {
     if (selected !== null) {
-      const prev = document.body.style.overflow;
       document.body.style.overflow = "hidden";
-      return () => (document.body.style.overflow = prev || "");
+      return () => {
+        document.body.style.overflow = "";
+      };
     }
+  }, [selected]);
+
+  useEffect(() => {
+    if (selected === null) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") goto("prev");
+      if (e.key === "ArrowRight") goto("next");
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selected]);
 
   const openLightbox = (i) => {
@@ -56,32 +64,13 @@ export default function Gallery() {
 
   const closeLightbox = () => setSelected(null);
 
-  // Smooth sliding logic
   const goto = (dir) => {
     if (selected === null) return;
-    if (animating) return;
-
-    setSlideDirection(dir);
     const next =
       dir === "prev"
         ? (selected - 1 + images.length) % images.length
         : (selected + 1) % images.length;
-
-    setIncoming(next);
-    setAnimating(true);
-    requestAnimationFrame(() => {
-      setAnimateIn(true);
-    });
-
-    // after animation completes, update selected and cleanup
-    const duration = 300;
-    setTimeout(() => {
-      setSelected(next);
-      setSlideDirection(null);
-      setIncoming(null);
-      setAnimateIn(false);
-      setAnimating(false);
-    }, duration);
+    setSelected(next);
   };
 
   return (
@@ -97,25 +86,15 @@ export default function Gallery() {
             onMouseEnter={() => setHovered(idx)}
             onMouseLeave={() => setHovered(null)}
             onClick={() => openLightbox(idx)}
-            className={`relative rounded-xl overflow-hidden bg-white shadow-md cursor-pointer transition-transform duration-300 ${
-              hovered === idx ? "scale-105 z-30" : "scale-100 z-10"
-            }`}
+            className="relative rounded-xl overflow-hidden bg-white shadow-md cursor-pointer transition-transform duration-200 hover:scale-105 will-change-transform"
           >
-            <div className="w-full h-64 overflow-hidden">
+            <div className="w-full aspect-video overflow-hidden bg-gray-100">
               <img
                 src={img.src}
                 alt={img.title}
-                className={`w-full h-full object-cover transition-transform duration-500 ${
-                  hovered === idx ? "scale-110" : "scale-100"
-                }`}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
               />
-            </div>
-
-            <div className="p-3 bg-white">
-              {/* <h3 className="text-sm font-semibold truncate">{img.title}</h3>
-              <p className="text-xs text-slate-500 truncate mt-1">
-                {img.category}
-              </p> */}
             </div>
           </div>
         ))}
@@ -123,68 +102,56 @@ export default function Gallery() {
 
       {/* Lightbox */}
       {selected !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-6">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+          onClick={closeLightbox}
+        >
           <button
-            onClick={closeLightbox}
-            className="absolute top-6 right-6 bg-white/20 hover:bg-white/30 backdrop-blur-md
-  text-white rounded-full w-12 h-12 flex items-center justify-center
-  transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg hover:cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeLightbox();
+            }}
+            className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 backdrop-blur-md
+              text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center
+              transition-all duration-200 hover:scale-110 active:scale-95 shadow-lg z-10"
           >
-            <X size={28} strokeWidth={2.5} />
+            <X size={24} strokeWidth={2.5} />
           </button>
 
           <button
-            onClick={() => goto("prev")}
-            className="absolute left-6 bg-white/20 hover:bg-white/30 backdrop-blur-md
-  text-white rounded-full w-12 h-12 flex items-center justify-center
-  transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg hover:cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              goto("prev");
+            }}
+            className="absolute left-2 sm:left-6 bg-white/20 hover:bg-white/30 backdrop-blur-md
+              text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center
+              transition-all duration-200 hover:scale-110 active:scale-95 shadow-lg z-10"
           >
-            <ChevronLeft size={32} strokeWidth={2.5} />
+            <ChevronLeft size={28} strokeWidth={2.5} />
           </button>
 
-          <div className="max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
-            <div className="relative w-full h-[80vh] bg-black flex items-center justify-center overflow-hidden">
-              <img
-                key={`current-${selected}`}
-                src={images[selected].src}
-                alt={images[selected].title}
-                className={`absolute w-full h-auto object-contain max-h-[80vh] transition-all duration-300 ease-in-out transform pointer-events-none
-                  ${
-                    animating
-                      ? slideDirection === "next"
-                        ? "-translate-x-full opacity-0"
-                        : "translate-x-full opacity-0"
-                      : "translate-x-0 opacity-100"
-                  }`}
-                style={{ zIndex: 10 }}
-              />
-
-              {incoming !== null && (
-                <img
-                  key={`incoming-${incoming}`}
-                  src={images[incoming].src}
-                  alt={images[incoming].title}
-                  className={`absolute w-full h-auto object-contain max-h-[80vh] transition-all duration-300 ease-in-out transform pointer-events-none
-                    ${
-                      animateIn
-                        ? "translate-x-0 opacity-100"
-                        : slideDirection === "next"
-                        ? "translate-x-full opacity-0"
-                        : "-translate-x-full opacity-0"
-                    }`}
-                  style={{ zIndex: 20 }}
-                />
-              )}
-            </div>
+          <div
+            className="max-w-6xl w-full h-full flex items-center justify-center p-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              key={selected}
+              src={images[selected].src}
+              alt={images[selected].title}
+              className="max-w-full max-h-full w-auto h-auto object-contain rounded-lg shadow-2xl"
+            />
           </div>
 
           <button
-            onClick={() => goto("next")}
-            className="absolute right-6 bg-white/20 hover:bg-white/30 backdrop-blur-md
-  text-white rounded-full w-12 h-12 flex items-center justify-center
-  transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg hover:cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              goto("next");
+            }}
+            className="absolute right-2 sm:right-6 bg-white/20 hover:bg-white/30 backdrop-blur-md
+              text-white rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center
+              transition-all duration-200 hover:scale-110 active:scale-95 shadow-lg z-10"
           >
-            <ChevronRight size={32} strokeWidth={2.5} />
+            <ChevronRight size={28} strokeWidth={2.5} />
           </button>
         </div>
       )}

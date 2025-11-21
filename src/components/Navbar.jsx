@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 px-2 sm:px-4 sticky top-0 z-50 shadow-sm">
       <div className="navbar-start">
-        <div className="dropdown lg:hidden">
+        <div className="dropdown max-[1370px]:block hidden">
           <div tabIndex={0} role="button" className="btn btn-ghost">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -31,26 +31,22 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
+              <Link to="/about-us">About Us</Link>
+            </li>
+            <li>
+              <Link to="/committee">Committee</Link>
+            </li>
+            <li>
               <Link to="/call-for-papers">Call for Papers</Link>
             </li>
             <li>
-              <Link to="/important-dates">Important Dates</Link>
-            </li>
-            <li>
-              <details>
-                <summary>Committee</summary>
-                <ul>
-                  <li>
-                    <Link to="/committee/advisory">Advisory Committee</Link>
-                  </li>
-                  <li>
-                    <Link to="/committee/program">Program Committee</Link>
-                  </li>
-                </ul>
-              </details>
+              <Link to="/publication">Publication</Link>
             </li>
             <li>
               <Link to="/submission">Submission</Link>
+            </li>
+            <li>
+              <Link to="/important-dates">Important Dates</Link>
             </li>
             <li>
               <Link to="/registration">Registration</Link>
@@ -62,9 +58,6 @@ const Navbar = () => {
               <Link to="/downloads">Downloads</Link>
             </li>
             <li>
-              <Link to="/publication">Publication</Link>
-            </li>
-            <li>
               <Link to="/gallery">Gallery</Link>
             </li>
             <li>
@@ -73,11 +66,27 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="flex flex-wrap justify-center gap-3 sm:gap-6 md:gap-8 text-sm sm:text-base">
+      <div className="navbar-center hidden min-[1371px]:flex">
+        <ul className="flex flex-wrap justify-center gap-3 sm:gap-6 text-sm sm:text-base">
           <li>
             <Link to="/" className="hover:opacity-70 transition-opacity">
               Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/about-us"
+              className="hover:opacity-70 transition-opacity"
+            >
+              About Us
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/committee"
+              className="hover:opacity-70 transition-opacity"
+            >
+              Committee
             </Link>
           </li>
           <li>
@@ -90,34 +99,11 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/important-dates"
+              to="/publication"
               className="hover:opacity-70 transition-opacity"
             >
-              Important Dates
+              Publication
             </Link>
-          </li>
-          <li className="relative group">
-            <span className="hover:opacity-70 transition-opacity cursor-pointer">
-              Committee
-            </span>
-            <ul className="absolute hidden group-hover:block bg-base-100 mt-2 py-2 px-4 rounded-lg min-w-[150px] z-10 shadow-lg before:content-[''] before:absolute before:bottom-full before:left-0 before:right-0 before:h-2">
-              <li className="py-1">
-                <Link
-                  to="/committee/advisory"
-                  className="hover:opacity-70 transition-opacity"
-                >
-                  Advisory Committee
-                </Link>
-              </li>
-              <li className="py-1">
-                <Link
-                  to="/committee/program"
-                  className="hover:opacity-70 transition-opacity"
-                >
-                  Program Committee
-                </Link>
-              </li>
-            </ul>
           </li>
           <li>
             <Link
@@ -125,6 +111,14 @@ const Navbar = () => {
               className="hover:opacity-70 transition-opacity"
             >
               Submission
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/important-dates"
+              className="hover:opacity-70 transition-opacity"
+            >
+              Important Dates
             </Link>
           </li>
           <li>
@@ -149,14 +143,6 @@ const Navbar = () => {
               className="hover:opacity-70 transition-opacity"
             >
               Downloads
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/publication"
-              className="hover:opacity-70 transition-opacity"
-            >
-              Publication
             </Link>
           </li>
           <li>
