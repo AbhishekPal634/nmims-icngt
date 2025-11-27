@@ -50,41 +50,41 @@ const CallForPapers = () => {
     {
       number: "I",
       title:
-        "Pharmaceutical Sciences, Drug delivery, Drug Testing, Diagnostics and medical devices for Healthcare Sustainability",
+        "Intelligent Systems, Computing and Digital Transformation for Sustainability",
     },
     {
       number: "II",
       title:
-        "Sustainable Water Management, Climate Change Mitigation, and Clean Energy Solutions for a Resilient Future",
+        "Clean Energy, Low-Carbon Engineering and Climate-Resilient Infrastructure ",
     },
     {
       number: "III",
       title:
-        "Textile Technology: Technical Textiles, Smart Textiles and Sustainable Textile Manufacturing",
+        "Sustainable Agriculture, Food Systems and Bio-resource Innovation",
     },
     {
       number: "IV",
       title:
-        "A Cutting-edge agricultural technologies for Sustainable farming, Precision Agriculture and Food Security;",
+        "Pharmaceutical Sciences, Public Health Technologies and Community Well-being",
     },
     {
       number: "V",
-      title:
-        "Engineering advancements for Sustainable developments with Smart systems;",
+      title: "Circular Textiles, Eco-materials and Responsible Manufacturing",
     },
     {
       number: "VI",
-      title: "Transformative Digital Technologies in Education;",
-    },
-    {
-      number: "VII",
-      title: "Technologies promoting Accessibility and Equity in education;",
-    },
-    {
-      number: "VIII",
       title:
-        "Safety, Security and ethical use of digital technologies for Sustainable Societies;",
+        "Education, Policy, Ethics and Technology Governance for Sustainable Development ",
     },
+    // {
+    //   number: "VII",
+    //   title: "Technologies promoting Accessibility and Equity in education;",
+    // },
+    // {
+    //   number: "VIII",
+    //   title:
+    //     "Safety, Security and ethical use of digital technologies for Sustainable Societies;",
+    // },
   ];
 
   return (
